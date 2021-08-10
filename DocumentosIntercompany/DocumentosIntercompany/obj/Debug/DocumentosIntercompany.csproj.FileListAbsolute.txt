@@ -1,0 +1,6 @@
+C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\bin\Debug\DocumentosIntercompany.exe
+C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\bin\Debug\DocumentosIntercompany.pdb
+C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\bin\Debug\SAPBusinessOneSDK.dll
+C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\obj\Debug\DocumentosIntercompany.csprojResolveAssemblyReference.cache
+C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\obj\Debug\DocumentosIntercompany.exe
+C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\obj\Debug\DocumentosIntercompany.pdb
