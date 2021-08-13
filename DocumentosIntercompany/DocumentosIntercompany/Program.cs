@@ -9,6 +9,10 @@ namespace DocumentosIntercompany
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
+
+        public static SAPbobsCOM.Company oCom;
+
         [STAThread]
         static void Main(string[] args)
         {
@@ -23,6 +27,9 @@ namespace DocumentosIntercompany
                 {
                     oApp = new Application(args[0]);
                 }
+
+                oCom = (SAPbobsCOM.Company)Application.SBO_Application.Company.GetDICompany();
+
                 Menu MyMenu = new Menu();
                 MyMenu.AddMenuItems();
                 oApp.RegisterMenuEventHandler(MyMenu.SBO_Application_MenuEvent);

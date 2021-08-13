@@ -89,6 +89,9 @@
     <Compile Include="DocInter.b1f.cs">
       <DependentUpon>DocInter.b1f</DependentUpon>
     </Compile>
+    <Compile Include="Factura de deudores.b1f.cs">
+      <DependentUpon>Factura de deudores.b1f</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +99,12 @@
   <ItemGroup>
     <None Include="DocInter.b1f">
       <FormCategory>UserForm</FormCategory>
+    </None>
+    <None Include="Factura de deudores.b1f">
+      <FormCategory>SystemForm</FormCategory>
+    </None>
+    <None Include="Factura de deudores.b1f__orig_srf">
+      <DependentUpon>Factura de deudores.b1f</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
