@@ -92,6 +92,16 @@
     <Compile Include="Factura de deudores.b1f.cs">
       <DependentUpon>Factura de deudores.b1f</DependentUpon>
     </Compile>
+    <Compile Include="Orden de venta.b1f.cs">
+      <DependentUpon>Orden de venta.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="Pagos recibidos.b1f.cs">
+      <DependentUpon>Pagos recibidos.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="Parametros.b1f.cs">
+      <DependentUpon>Parametros.b1f</DependentUpon>
+    </Compile>
+    <Compile Include="ParametrosConexion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,6 +115,21 @@
     </None>
     <None Include="Factura de deudores.b1f__orig_srf">
       <DependentUpon>Factura de deudores.b1f</DependentUpon>
+    </None>
+    <None Include="Orden de venta.b1f">
+      <FormCategory>SystemForm</FormCategory>
+    </None>
+    <None Include="Orden de venta.b1f__orig_srf">
+      <DependentUpon>Orden de venta.b1f</DependentUpon>
+    </None>
+    <None Include="Pagos recibidos.b1f">
+      <FormCategory>SystemForm</FormCategory>
+    </None>
+    <None Include="Pagos recibidos.b1f__orig_srf">
+      <DependentUpon>Pagos recibidos.b1f</DependentUpon>
+    </None>
+    <None Include="Parametros.b1f">
+      <FormCategory>UserForm</FormCategory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
