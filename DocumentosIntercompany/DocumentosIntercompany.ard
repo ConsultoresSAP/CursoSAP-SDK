@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AddOnRegData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SlientInstallation="No" SlientUpgrade="No" Partnernmsp="DI" SchemaVersion="3.0" Type="" MultipleVersion="false" OnDemand="" OnPremise="" ExtName="Documentos Intercompany" ExtVersion="1.0.0" Contdata="roquememo11@gmail.com" Partner="SAP" DBType="MSSQL" ClientType="W">
+  <Validity>
+    <SBOCompatibility>
+      <Version From="9.3" To="9.3" />
+    </SBOCompatibility>
+  </Validity>
+  <Configuration>
+    <Repository>
+      <Properties />
+    </Repository>
+    <Deployment>
+      <Properties />
+    </Deployment>
+    <Assignment>
+      <Properties />
+    </Assignment>
+  </Configuration>
+  <Addons>
+    <Addon Name="" Group="" ForceFlag="" Visible="" AutoAssign="" SelfUpgrd="">
+      <x86 AddonExe="C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\bin\x86\Release\DocumentosIntercompany.exe" AddonSig="">
+        <Installation>
+          <Files>
+            <File FileName="diLogo.bmp">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.b1s">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.exe">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.pdb">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.vshost.exe">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.vshost.exe.manifest">
+              <Actions />
+            </File>
+            <File FileName="SAPBusinessOneSDK.dll">
+              <Actions />
+            </File>
+          </Files>
+        </Installation>
+        <Uninstallation>
+          <Files>
+            <File FileName="diLogo.bmp">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.b1s">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.exe">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.pdb">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.vshost.exe">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.vshost.exe.manifest">
+              <Actions />
+            </File>
+            <File FileName="SAPBusinessOneSDK.dll">
+              <Actions />
+            </File>
+          </Files>
+        </Uninstallation>
+      </x86>
+      <x64 AddonExe="C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\bin\x64\Release\DocumentosIntercompany.exe" AddonSig="">
+        <Installation>
+          <Files>
+            <File FileName="diLogo.bmp">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.b1s">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.exe">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.pdb">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.vshost.exe">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.vshost.exe.manifest">
+              <Actions />
+            </File>
+            <File FileName="SAPBusinessOneSDK.dll">
+              <Actions />
+            </File>
+          </Files>
+        </Installation>
+        <Uninstallation>
+          <Files>
+            <File FileName="diLogo.bmp">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.b1s">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.exe">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.pdb">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.vshost.exe">
+              <Actions />
+            </File>
+            <File FileName="DocumentosIntercompany.vshost.exe.manifest">
+              <Actions />
+            </File>
+            <File FileName="SAPBusinessOneSDK.dll">
+              <Actions />
+            </File>
+          </Files>
+        </Uninstallation>
+      </x64>
+    </Addon>
+  </Addons>
+  <XApps>
+    <XApp Name="" Path="" FileName="" />
+  </XApps>
+  <UDQs>
+    <UDQ udqname="">
+      <Hana FileName="" />
+    </UDQ>
+  </UDQs>
+</AddOnRegData>

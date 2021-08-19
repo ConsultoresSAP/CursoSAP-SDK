@@ -21,6 +21,7 @@ namespace DocumentosIntercompany
             oCreationPackage.Type = SAPbouiCOM.BoMenuType.mt_POPUP;
             oCreationPackage.UniqueID = "DocumentosIntercompany";
             oCreationPackage.String = "Documentos Intercompany";
+            oCreationPackage.Image = System.Windows.Forms.Application.StartupPath+ "\\diLogo.bmp";
             oCreationPackage.Enabled = true;
             oCreationPackage.Position = -1;
 

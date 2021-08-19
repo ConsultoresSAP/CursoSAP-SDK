@@ -1,0 +1,5 @@
+C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\bin\x64\Release\DocumentosIntercompany.exe
+C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\bin\x64\Release\DocumentosIntercompany.pdb
+C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\bin\x64\Release\SAPBusinessOneSDK.dll
+C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\obj\x64\Release\DocumentosIntercompany.exe
+C:\Users\User-02\Desktop\CursoSAP-SDK\DocumentosIntercompany\DocumentosIntercompany\obj\x64\Release\DocumentosIntercompany.pdb
