@@ -48,18 +48,23 @@ namespace DocumentosIntercompany
             {
                 case SAPbouiCOM.BoAppEventTypes.aet_ShutDown:
                     //Exit Add-On
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Program.oCom);
                     System.Windows.Forms.Application.Exit();
                     break;
                 case SAPbouiCOM.BoAppEventTypes.aet_CompanyChanged:
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Program.oCom);
                     System.Windows.Forms.Application.Exit();
                     break;
                 case SAPbouiCOM.BoAppEventTypes.aet_FontChanged:
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Program.oCom);
                     System.Windows.Forms.Application.Exit();
                     break;
                 case SAPbouiCOM.BoAppEventTypes.aet_LanguageChanged:
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Program.oCom);
                     System.Windows.Forms.Application.Exit();
                     break;
                 case SAPbouiCOM.BoAppEventTypes.aet_ServerTerminition:
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Program.oCom);
                     System.Windows.Forms.Application.Exit();
                     break;
                 default:
