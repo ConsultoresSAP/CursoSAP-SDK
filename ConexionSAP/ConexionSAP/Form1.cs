@@ -540,7 +540,8 @@ namespace ConexionSAP
             try
             {
                 //string DocEntry = "";
-                this.sap.CrearUDO();
+                this.sap.ActualizarListaDePrecios();
+                //this.sap.CrearUDO();
 
                 if (this.sap.Error != "")
                 {

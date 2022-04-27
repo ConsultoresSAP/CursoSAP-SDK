@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SAPbobsCOM;
+using System.Xml;
 
 namespace ConexionSAP
 {
@@ -398,7 +399,7 @@ namespace ConexionSAP
         public void CrearPedido(out string DocEntry)
         {
             DocEntry = "";
-            SAPbobsCOM.Documents oPedido=null;
+            SAPbobsCOM.Documents oPedido = null;
             try
             {
                 this.Error = "";
@@ -422,14 +423,15 @@ namespace ConexionSAP
                 if (oPedido.Add() != 0)
                 {
                     this.Error = this.oCom.GetLastErrorDescription();
-                }else
+                }
+                else
                 {
                     DocEntry = this.oCom.GetNewObjectKey();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                this.Error= e.Message;
+                this.Error = e.Message;
             }
             finally
             {
@@ -443,7 +445,7 @@ namespace ConexionSAP
 
         public void agregarLineaPedido(int DocEntry)
         {
-            SAPbobsCOM.Documents oPedido=null;
+            SAPbobsCOM.Documents oPedido = null;
             try
             {
                 this.Error = "";
@@ -461,11 +463,12 @@ namespace ConexionSAP
                         {
                             this.Error = this.oCom.GetLastErrorDescription();
                         }
-                    }else
+                    }
+                    else
                     {
                         this.Error = "Documento Cerrado";
                     }
-                   
+
 
                 }
                 else
@@ -473,7 +476,8 @@ namespace ConexionSAP
                     this.Error = "Pedido no existe";
                 }
 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
 
             }
@@ -503,7 +507,7 @@ namespace ConexionSAP
                 oPedido.Lines.ItemDescription = "Servicio de ejemplo";
                 oPedido.Lines.AccountCode = "_SYS00000000361";
                 oPedido.Lines.LineTotal = 500;
-                
+
 
                 if (oPedido.Add() != 0)
                 {
@@ -600,7 +604,7 @@ namespace ConexionSAP
                 oDevolucion.Lines.Quantity = 2;
                 oDevolucion.Lines.TaxCode = "IVA";
 
-                
+
 
                 if (oDevolucion.Add() != 0)
                 {
@@ -646,6 +650,7 @@ namespace ConexionSAP
                 oSalida.Lines.CostingCode = "10001";
                 oSalida.Lines.CostingCode2 = "20001";
 
+
                 //Lotes
                 oSalida.Lines.BatchNumbers.SetCurrentLine(0);
                 oSalida.Lines.BatchNumbers.Quantity = 2;
@@ -654,12 +659,14 @@ namespace ConexionSAP
                 if (oSalida.Add() != 0)
                 {
                     this.Error = this.oCom.GetLastErrorDescription();
-                }else
+                }
+                else
                 {
                     DocEntry = this.oCom.GetNewObjectKey();
                 }
 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
 
             }
@@ -709,13 +716,14 @@ namespace ConexionSAP
                 if (oFacturas.Add() != 0)
                 {
                     this.Error = this.oCom.GetLastErrorDescription();
-                }else
+                }
+                else
                 {
                     DocEntry = this.oCom.GetNewObjectKey();
                 }
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 this.Error = e.Message;
             }
@@ -738,7 +746,7 @@ namespace ConexionSAP
 
 
                 oRecord.DoQuery("SELECT " +
-                                "T0.[CardCode], "+
+                                "T0.[CardCode], " +
                                 "T0.[DocEntry] AS 'N. Interno', " +
                                 "T1.[LineNum] AS 'Linea', " +
                                 "T1.[TaxCode] AS 'Impuesto' " +
@@ -822,13 +830,15 @@ namespace ConexionSAP
                 if (oTransf.Add() != 0)
                 {
                     this.Error = this.oCom.GetLastErrorDescription();
-                }else
+                }
+                else
                 {
                     Valor = this.oCom.GetNewObjectKey();
                 }
 
 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 this.Error = e.Message;
             }
@@ -844,9 +854,91 @@ namespace ConexionSAP
 
         #endregion
 
+        #region Borrador
+
+        public void CrearPedidoEnBaseABorrador(out string DocEntry)
+        {
+            DocEntry = "";
+            SAPbobsCOM.Documents oPedido = null;
+            SAPbobsCOM.Documents Draft = null;
+            try
+            {
+                this.Error = "";
+                this.oCom.XmlExportType = SAPbobsCOM.BoXmlExportTypes.xet_ExportImportMode;
+                this.oCom.XMLAsString = false;
+                string xml = @"C:\Users\User-02\Desktop\CursoSAP DI API\CursoSDK-DIAPI\XMLBorrador.xml";
+                XmlDocument XmlBorrador = new XmlDocument();
+                XmlNode NodoDocObjectCode;
+                XmlNode NodoDocNum;
+                XmlNode Nodo;
+
+                Draft = (SAPbobsCOM.Documents)this.oCom.GetBusinessObject(BoObjectTypes.oDrafts);
+
+                Draft.GetByKey(87);
+
+                Draft.SaveXML(ref xml);
+                XmlBorrador.Load(xml);
+                XmlBorrador.SelectSingleNode("BOM/BO/AdmInfo/Object").InnerText = "17";
+                NodoDocNum = XmlBorrador.SelectSingleNode("BOM/BO/Documents/row/DocNum");
+                XmlBorrador.SelectSingleNode("BOM/BO/Documents/row").RemoveChild(NodoDocNum);
+
+                NodoDocObjectCode = XmlBorrador.SelectSingleNode("BOM/BO/Documents/row/DocObjectCode");
+                XmlBorrador.SelectSingleNode("BOM/BO/Documents/row").RemoveChild(NodoDocObjectCode);
+
+                Nodo = XmlBorrador.SelectSingleNode("BOM/BO/Documents/row/ReqType");
+                XmlBorrador.SelectSingleNode("BOM/BO/Documents/row").RemoveChild(Nodo);
+                Nodo = XmlBorrador.SelectSingleNode("BOM/BO/Documents/row/Revision");
+                XmlBorrador.SelectSingleNode("BOM/BO/Documents/row").RemoveChild(Nodo);
+                Nodo = XmlBorrador.SelectSingleNode("BOM/BO/Documents/row/IssuingReason");
+                XmlBorrador.SelectSingleNode("BOM/BO/Documents/row").RemoveChild(Nodo);
+
+                for (int i = 0; i < XmlBorrador.SelectNodes("BOM/BO/Document_Lines/row").Count; i++)
+                {
+                    var NodoActual = XmlBorrador.SelectNodes("BOM/BO/Document_Lines/row")[i];
+                    string valor = NodoActual.InnerXml;
+                    Nodo = NodoActual.SelectSingleNode("EnableReturnCost");
+                    XmlBorrador.SelectNodes("BOM/BO/Document_Lines/row")[i].RemoveChild(Nodo);
+                    Nodo = NodoActual.SelectSingleNode("ReturnCost");
+                    XmlBorrador.SelectNodes("BOM/BO/Document_Lines/row")[i].RemoveChild(Nodo);
+                    Nodo = NodoActual.SelectSingleNode("LineVendor");
+                    XmlBorrador.SelectNodes("BOM/BO/Document_Lines/row")[i].RemoveChild(Nodo);
+                }
+
+
+                XmlBorrador.Save(xml);
+
+                oPedido = (SAPbobsCOM.Documents)this.oCom.GetBusinessObjectFromXML(xml, 0);
+
+                if (oPedido.Add() != 0)
+                {
+                    this.Error = this.oCom.GetLastErrorDescription();
+                }
+                else
+                {
+                    DocEntry = this.oCom.GetNewObjectKey();
+                    Draft.Remove();
+                }
+
+            }
+            catch (System.Runtime.InteropServices.COMException e)
+            {
+                this.Error = e.Message;
+            }
+            finally
+            {
+                if (oPedido != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oPedido);
+                    oPedido = null;
+                }
+            }
+        }
+
+        #endregion
+
         #region PAGOS
 
-        public void CrearPago(out string Valor,int DocEntry)
+        public void CrearPago(out string Valor, int DocEntry)
         {
             Valor = "";
             SAPbobsCOM.Payments oPago = null;
@@ -897,7 +989,8 @@ namespace ConexionSAP
                     if (oPago.Add() != 0)
                     {
                         this.Error = this.oCom.GetLastErrorDescription();
-                    }else
+                    }
+                    else
                     {
                         Valor = this.oCom.GetNewObjectKey();
                     }
@@ -908,7 +1001,8 @@ namespace ConexionSAP
                     this.Error = "Factura no existe";
                 }
 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 this.Error = e.Message;
             }
@@ -940,7 +1034,7 @@ namespace ConexionSAP
 
                 oRecord.DoQuery("SELECT * FROM [OINV] T0 WHERE T0.[DocNum]=" + DocNum);
 
-                if (oRecord.RecordCount>0)
+                if (oRecord.RecordCount > 0)
                 {
                     oPago.CardCode = oRecord.Fields.Item("CardCode").Value.ToString();
                     oPago.DocDate = DateTime.Today;
@@ -949,7 +1043,7 @@ namespace ConexionSAP
                     //Medios de Pago
                     //Efectivo
                     //oPago.CashSum = oFacturaBase.DocTotal; Pagar Total de la factura
-                    oPago.CashSum = Double.Parse(oRecord.Fields.Item("DocTotal").Value.ToString())-Double.Parse(oRecord.Fields.Item("PaidToDate").Value.ToString());
+                    oPago.CashSum = Double.Parse(oRecord.Fields.Item("DocTotal").Value.ToString()) - Double.Parse(oRecord.Fields.Item("PaidToDate").Value.ToString());
 
                     //Transferencia
                     //oPago.TransferAccount = "_SYS00000000001";
@@ -1011,6 +1105,8 @@ namespace ConexionSAP
                 oRecord = null;
             }
         }
+
+        #endregion
 
         #endregion
 
@@ -1223,7 +1319,7 @@ namespace ConexionSAP
                     GC.Collect();
                 }
 
-                oUDF.TableName = Tabla;
+                    oUDF.TableName = Tabla;
                     oUDF.Name = Code;
                     oUDF.Description = Desc;
                     oUDF.Size = Tam;
@@ -1263,13 +1359,6 @@ namespace ConexionSAP
                             this.Error = this.oCom.GetLastErrorDescription();
                         }
                     }
-
-                    
-                
-
-
-               
-
 
             }
             catch(Exception e)
@@ -1342,11 +1431,195 @@ namespace ConexionSAP
 
         #endregion
 
+        #region Insertar Regsitros UDO
 
+        private void ADD()
+        {
+            SAPbobsCOM.CompanyService oCompanyService = null;
+            SAPbobsCOM.GeneralService oGeneralServices = null;
+            SAPbobsCOM.GeneralData oGeneralData = null;
+            SAPbobsCOM.GeneralDataParams oGeneralParams = null;
+
+            SAPbobsCOM.GeneralDataCollection Lineas = null;
+            SAPbobsCOM.GeneralData Linea = null;
+            try
+            {
+                oCompanyService = this.oCom.GetCompanyService();
+                oGeneralServices = oCompanyService.GetGeneralService("HC_CONT");
+                oGeneralData = ((SAPbobsCOM.GeneralData)(oGeneralServices.GetDataInterface(SAPbobsCOM.GeneralServiceDataInterfaces.gsGeneralData)));
+
+                oGeneralData.SetProperty("U_HC_QQAb", "Valor");
+
+                Lineas = oGeneralData.Child("HC_CON1");
+
+                Linea = Lineas.Add();
+                Linea.SetProperty("U_HC_QQPend", "ValorLinea");
+
+                oGeneralParams = oGeneralServices.Add(oGeneralData);
+
+                oGeneralServices.Update(oGeneralData);
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                if (oCompanyService != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oCompanyService);
+                    oCompanyService = null;
+                }
+                if (oGeneralServices != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oGeneralServices);
+                    oGeneralServices = null;
+                }
+                if (oGeneralData != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oGeneralData);
+                    oGeneralData = null;
+                }
+                if (oGeneralParams != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oGeneralParams);
+                    oGeneralParams = null;
+                }
+                if (Lineas != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Lineas);
+                    Lineas = null;
+                }
+                if (Linea != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Linea);
+                    Linea = null;
+                }
+            }
+        }
+
+        private void Editar()
+        {
+            SAPbobsCOM.CompanyService oCompanyService = null;
+            SAPbobsCOM.GeneralService oGeneralServices = null;
+            SAPbobsCOM.GeneralData oGeneralData = null;
+            SAPbobsCOM.GeneralDataParams oGeneralParams = null;
+
+            SAPbobsCOM.GeneralDataCollection Lineas = null;
+            SAPbobsCOM.GeneralData Linea = null;
+            try
+            {  
+                oCompanyService = this.oCom.GetCompanyService();
+                oGeneralServices = oCompanyService.GetGeneralService("HC_CONT");    
+                  
+                oGeneralParams = (SAPbobsCOM.GeneralDataParams)oGeneralServices.GetDataInterface(SAPbobsCOM.GeneralServiceDataInterfaces.gsGeneralDataParams);  
+                oGeneralParams.SetProperty("DocEntry", Int32.Parse("Entry"));
+
+                oGeneralData = oGeneralServices.GetByParams(oGeneralParams);
+                oGeneralData.SetProperty("U_HC_QQAb", "Valor");
+
+                Lineas = oGeneralData.Child("HC_CON1");
+
+                Linea = Lineas.Item(1);
+                Linea.SetProperty("U_HC_QQPend", "ValorLinea");
+
+                oGeneralServices.Update(oGeneralData);
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                if (oCompanyService != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oCompanyService);
+                    oCompanyService = null;
+                }
+                if (oGeneralServices != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oGeneralServices);
+                    oGeneralServices = null;
+                }
+                if (oGeneralData != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oGeneralData);
+                    oGeneralData = null;
+                }
+                if (oGeneralParams != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(oGeneralParams);
+                    oGeneralParams = null;
+                }
+                if (Lineas != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Lineas);
+                    Lineas = null;
+                }
+                if (Linea != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Linea);
+                    Linea = null;
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region Insertar Registros UDT
 
 
 
         #endregion
+
+        #region PRICELIST
+
+        public void ActualizarListaDePrecios()
+        {
+            SAPbobsCOM.Items Item = null;
+            try
+            {
+                if (true)
+                {
+                    Item = (SAPbobsCOM.Items)this.oCom.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oItems);
+                    int listaEditar = 2;
+                    int listaBase = 2;
+                    double Precio=500;
+                    double Factor=1;
+                    string ItemCode= "A00002";
+
+                    if (Item.GetByKey(ItemCode))
+                    {
+                        Item.PriceList.SetCurrentLine(listaEditar);
+                           
+                            Item.PriceList.BasePriceList = listaBase;
+                            Item.PriceList.Factor = Factor;
+                            //Item.PriceList.Price = Precio;
+                            int lretcode = Item.Update();
+                            if (lretcode != 0)
+                            {
+                                this.Error= "Error en Articulo:" + ItemCode + " No se continuará con la actualización de la lista, " + this.oCom.GetLastErrorDescription().ToString();
+                            }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                this.Error = e.Message;
+            }
+            finally
+            {
+                if (Item != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Item);
+                    Item = null;
+                }
+
+            }
+        }
+
+        #endregion
+
+
 
 
     }
